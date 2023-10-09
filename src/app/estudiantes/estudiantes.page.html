@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title *ngIf="seleccionado">Materia: {{seleccionado.nombre}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let estudianteItem of estudiantes">
+    <ion-card-header>
+      <ion-card-title>
+        <h2>{{estudianteItem.nombre_estudiante}}</h2>
+      </ion-card-title>
+      <ion-card-subtitle>
+        <h4>Nota definitiva: {{estudianteItem.definitiva}}</h4>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Faltas: {{estudianteItem.faltas}}</p>
+      <p>
+        Nota 1: {{estudianteItem.nota_uno}} || Nota 2: {{estudianteItem.nota_dos}} || Nota
+        3: {{estudianteItem.nota_tres}}
+      </p>
+      <!-- <ion-button (click)="../editar-estudiante/{{estudianteItem.id}}>
+        <ion-icon slot="icon-only" name="pencil"></ion-icon>
+        Editar</ion-button
+      > -->
+      <ion-button routerLink="../editarestudiante/{{estudianteItem.id}}">
+        <ion-icon slot="icon-only" name="pencil"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="borrarEstudiante(estudianteItem);$event.stopPropagation();">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+        Borrar</ion-button>
+    </ion-card-content>
+
+    <ion-item-options side="end">
+      <ion-item-option>
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+
+    </ion-item-options>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/nuevoestudiante" routerDirector="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
